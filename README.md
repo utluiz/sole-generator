@@ -9,6 +9,6 @@ In order to avoid inconsistent systems, it checks for independence of equations 
 
 Example of usage:
 
-    Sole s = Sole.generate(10);
+    Sole s = SoleBuilder.generateRandomConsistentInt(32, -10, 10);
     
-Where `10` is the number of variable, os size.
+Where `32` is the number of variables or just the  matrix size.
