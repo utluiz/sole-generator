@@ -11,4 +11,4 @@ Example of usage:
 
     Sole s = SoleBuilder.generateRandomConsistentInt(32, -10, 10);
     
-Where `32` is the number of variables or just the  matrix size.
+Where `32` is the number of variables or just the  matrix size. The next parameters define the range of random numbers. 
