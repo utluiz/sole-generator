@@ -9,12 +9,23 @@ public class SoleBuilder {
 		double[] x = new double[size], b = new double[size];
 		
 		for (int i = 0; i < size; i++) {
-			x[i] = Math.random() * range + minValue;
+			x[i] = Math.rint(10 * (Math.random() * range + minValue)) / 10;
 			b[i] = 0;
+			double max = minValue;
 			for (int j = 0; j < size; j++) {
-				a[i][j] = Math.random() * range + minValue;
-				b[i] += a[i][j] * x[i]; 
+				if (j != i) {
+					a[i][j] = Math.rint(10 * (Math.random() * range + minValue)) / 10;
+					if (a[i][j] > max) {
+						max = a[i][j];
+					}
+					b[i] += a[i][j] * x[i]; 
+				}
 			}
+			a[i][i] = Math.rint(10 * (Math.random() * range + minValue)) / 10;
+			if (a[i][i] < max) {
+				a[i][i] = max + 1;
+			}
+			b[i] += a[i][i] * x[i]; 
 		}
 		
 		return new Sole(a, x, b);
@@ -30,10 +41,21 @@ public class SoleBuilder {
 		for (int i = 0; i < size; i++) {
 			x[i] = Math.round(Math.random() * range + minValue);
 			b[i] = 0;
+			double max = minValue;
 			for (int j = 0; j < size; j++) {
-				a[i][j] = Math.round(Math.random() * range + minValue);
-				b[i] += a[i][j] * x[i]; 
+				if (j != i) {
+					a[i][j] = Math.round(Math.random() * range + minValue);
+					if (a[i][j] > max) {
+						max = a[i][j];
+					}
+					b[i] += a[i][j] * x[i]; 
+				}
 			}
+			a[i][i] = Math.round(Math.random() * range + minValue);
+			if (a[i][i] < max) {
+				a[i][i] = max + 1;
+			}
+			b[i] += a[i][i] * x[i]; 
 		}
 		
 		return new Sole(a, x, b);
@@ -55,10 +77,18 @@ public class SoleBuilder {
 	public static Sole generateRandomConsistent(int size) {
 		
 		Sole s = null;
-		int t = 1;
 		do {
-			//System.out.println("trying " + t++);
 			s = generateRandom(size);
+		} while (!s.isConsistent());
+		return s;
+		
+	}
+	
+	public static Sole generateRandomConsistent(int size, int minValue, int maxValue) {
+		
+		Sole s = null;
+		do {
+			s = generateRandom(size, minValue, maxValue);
 		} while (!s.isConsistent());
 		return s;
 		
@@ -67,9 +97,7 @@ public class SoleBuilder {
 	public static Sole generateRandomConsistentInt(int size) {
 		
 		Sole s = null;
-		int t = 1;
 		do {
-			//System.out.println("trying " + t++);
 			s = generateRandomInt(size);
 		} while (!s.isConsistent());
 		return s;
@@ -79,7 +107,7 @@ public class SoleBuilder {
 	public static Sole generateRandomConsistentInt(int size, int minValue, int maxValue) {
 		
 		Sole s = null;
-		int t = 1;
+		//int t = 1;
 		do {
 			//System.out.println("trying " + t++);
 			s = generateRandomInt(size, minValue, maxValue);
