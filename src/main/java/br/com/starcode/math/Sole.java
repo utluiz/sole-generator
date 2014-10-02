@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 
 /**
@@ -136,7 +137,9 @@ public class Sole {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		DecimalFormat df = new DecimalFormat("#.######");
+		DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+		dfs.setDecimalSeparator('.');
+		DecimalFormat df = new DecimalFormat("0.0#####", dfs);
 		
 		sb.append(size);
 		sb.append('\n');

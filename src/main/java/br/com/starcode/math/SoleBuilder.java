@@ -57,7 +57,7 @@ public class SoleBuilder {
 		Sole s = null;
 		int t = 1;
 		do {
-			System.out.println("trying " + t++);
+			//System.out.println("trying " + t++);
 			s = generateRandom(size);
 		} while (!s.isConsistent());
 		return s;
@@ -69,7 +69,7 @@ public class SoleBuilder {
 		Sole s = null;
 		int t = 1;
 		do {
-			System.out.println("trying " + t++);
+			//System.out.println("trying " + t++);
 			s = generateRandomInt(size);
 		} while (!s.isConsistent());
 		return s;
@@ -81,7 +81,7 @@ public class SoleBuilder {
 		Sole s = null;
 		int t = 1;
 		do {
-			System.out.println("trying " + t++);
+			//System.out.println("trying " + t++);
 			s = generateRandomInt(size, minValue, maxValue);
 		} while (!s.isConsistent());
 		return s;
