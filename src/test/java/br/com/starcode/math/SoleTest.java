@@ -4,8 +4,27 @@ import java.io.FileOutputStream;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.la4j.LinearAlgebra;
+import org.la4j.linear.LinearSystemSolver;
+import org.la4j.matrix.Matrix;
+import org.la4j.matrix.sparse.CRSMatrix;
+import org.la4j.vector.Vector;
+import org.la4j.vector.dense.BasicVector;
 
 public class SoleTest {
+	
+	@Test
+	public void tryJacobi() throws Exception {
+		
+		Sole s = SoleBuilder.generateRandomConsistentInt(32, -10, 10);
+		
+		Matrix a = new CRSMatrix(s.getA());
+		Vector b = new BasicVector(s.b);
+		LinearSystemSolver solver = a.withSolver(LinearAlgebra.JACOBI);
+		Vector x = solver.solve(b, LinearAlgebra.SPARSE_FACTORY);
+		System.out.println(x);
+		
+	}
 	
 	@Test
 	public void write() throws Exception {

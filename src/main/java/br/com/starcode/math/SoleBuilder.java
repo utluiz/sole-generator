@@ -11,19 +11,16 @@ public class SoleBuilder {
 		for (int i = 0; i < size; i++) {
 			x[i] = Math.rint(10 * (Math.random() * range + minValue)) / 10;
 			b[i] = 0;
-			double max = 0;
+			double sum = 0;
 			for (int j = 0; j < size; j++) {
 				if (j != i) {
-					a[i][j] = Math.rint(10 * (Math.random() * range + minValue)) / 10;
-					if (Math.abs(a[i][j]) > Math.abs(max)) {
-						max = a[i][j];
-					}
+					sum += Math.abs(a[i][j] = Math.rint(10 * (Math.random() * range + minValue)) / 10);
 					b[i] += a[i][j] * x[i]; 
 				}
 			}
 			a[i][i] = Math.rint(10 * (Math.random() * range + minValue)) / 10;
-			if (a[i][i] < max) {
-				a[i][i] = max + (max > 0 ? 1 : -1);
+			if (Math.abs(a[i][i]) <= Math.abs(sum)) {
+				a[i][i] += a[i][i] > 0 ? Math.abs(sum) : -Math.abs(sum);
 			}
 			b[i] += a[i][i] * x[i]; 
 		}
@@ -41,19 +38,16 @@ public class SoleBuilder {
 		for (int i = 0; i < size; i++) {
 			x[i] = Math.round(Math.random() * range + minValue);
 			b[i] = 0;
-			double max = 0;
+			double sum = 0;
 			for (int j = 0; j < size; j++) {
 				if (j != i) {
-					a[i][j] = Math.round(Math.random() * range + minValue);
-					if (Math.abs(a[i][j]) > Math.abs(max)) {
-						max = a[i][j];
-					}
+					sum += Math.abs(a[i][j] = Math.round(Math.random() * range + minValue));
 					b[i] += a[i][j] * x[i]; 
 				}
 			}
 			a[i][i] = Math.round(Math.random() * range + minValue);
-			if (a[i][i] < max) {
-				a[i][i] = max + (max > 0 ? 1 : -1);
+			if (Math.abs(a[i][i]) <= Math.abs(sum)) {
+				a[i][i] += a[i][i] > 0 ? Math.abs(sum) : -Math.abs(sum);
 			}
 			b[i] += a[i][i] * x[i]; 
 		}
